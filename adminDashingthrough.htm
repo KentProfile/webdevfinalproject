@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+        }
+
+        #navbar {
+            background-color: #333;
+            padding: 15px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Align items vertically in the center */
+        }
+
+        #hamburger {
+            cursor: pointer;
+            color: white;
+            font-size: 24px;
+            margin-left: 15px;
+            transition: margin-left 0.5s; /* Added transition for smooth adjustment */
+        }
+
+        #profile {
+            display: flex;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+        }
+
+        #profile img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        #dropdown {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: #555;
+            min-width: 120px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        #dropdown a {
+            padding: 12px;
+            text-decoration: none;
+            font-size: 16px;
+            color: white;
+            display: block;
+            text-align: center;
+        }
+
+        #dropdown a:hover {
+            background-color: #777;
+        }
+
+        #sidebar {
+            width: 250px;
+            height: 100%;
+            background-color: #555;
+            padding-top: 20px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            transition: 0.5s;
+        }
+
+        #sidebar a {
+            padding: 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+        }
+
+        #content {
+            margin-left: 0; /* Adjusted margin when the sidebar is hidden */
+            margin-right: 0; /* Adjusted margin when the sidebar is hidden */
+            padding: 20px;
+            text-align: center; /* Center the content */
+            transition: margin-left 0.5s, margin-right 0.5s; /* Added transition for smooth adjustment */
+            position: absolute;
+            top: 50%;
+            left: 50%; /* Center the content horizontally */
+            transform: translate(-50%, -50%); /* Center the content vertically */
+        }
+
+        .box-container {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping to the next line */
+            justify-content: space-around;
+            margin-top: 20px;
+            transition: margin-top 0.5s; /* Added transition for smooth adjustment */
+        }
+
+        .box {
+            width: 200px;
+            height: 150px;
+            background-color: #eee;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 0 10px 20px 10px; /* Adjusted margin for spacing and flow */
+            box-sizing: border-box;
+        }
+
+        @media screen and (max-width: 600px) {
+            #sidebar {
+                left: 0;
+            }
+
+            #hamburger {
+                margin-left: 250px; /* Adjusted margin when the sidebar is shown */
+            }
+
+            #profile {
+                display: none; /* Hide the profile on small screens */
+            }
+
+            #content {
+                margin-left: 250px; /* Adjusted margin when the sidebar is shown */
+                margin-right: 0; /* Removed right margin when the sidebar is shown */
+                width: calc(100% - 250px); /* Adjusted width to take remaining space */
+                text-align: center; /* Adjusted text alignment to center when the sidebar is shown */
+            }
+
+            .box-container {
+                margin-top: 40px; /* Adjusted top margin when the sidebar is shown on small screens */
+            }
+
+            .box {
+                margin-bottom: 20px; /* Adjusted margin for spacing when the sidebar is shown */
+            }
+        }
+
+        @media screen and (min-width: 601px) and (max-width: 900px) {
+            .box-container {
+                flex-wrap: nowrap; /* Disable wrapping for medium-sized screens */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="navbar">
+    <div id="hamburger">&#9776;</div>
+    <div id="profile" onclick="toggleDropdown()">
+        <img src=".png" alt="Admin Profile Image">
+        <span>ADMIN</span>
+        <div id="dropdown">
+            <a href="#">Logout</a>
+            <a href="#">Settings</a>
+        </div>
+    </div>
+</div>
+
+<div id="sidebar">
+    <a href="#">Dashboard</a>
+    <a href="#">Employees</a>
+    <a href="#">Employee Maintenance</a>
+    <a href="#">Log-in Report</a>
+    <a href="#">Daily Attendance Report</a>
+    <a href="#">Monthly Attendance Report</a>
+</div>
+
+<div id="content">
+    <!-- Your page content goes here -->
+    <h1>Welcome to Your Dashboard</h1>
+
+    <div class="box-container">
+        <div class="box">Employee Maintenance</div>
+        <div class="box">Log-in Report</div>
+        <div class="box">Daily Attendance Report</div>
+        <div class="box">Monthly Attendance Report</div>
+    </div>
+</div>
+
+<script>
+    function toggleDropdown() {
+        var dropdown = document.getElementById('dropdown');
+        dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+    }
+
+    document.getElementById('hamburger').addEventListener('click', function () {
+        var sidebar = document.getElementById('sidebar');
+        var hamburger = document.getElementById('hamburger');
+        var content = document.getElementById('content');
+        var boxContainer = document.querySelector('.box-container');
+        
+        if (sidebar.style.left === '0px') {
+            sidebar.style.left = '-250px';
+            hamburger.style.marginLeft = '15px'; // Adjusted margin when the sidebar is hidden
+            content.style.marginLeft = '0'; // Adjusted margin when the sidebar is hidden
+            content.style.marginRight = '0'; // Adjusted margin when the sidebar is hidden
+            content.style.paddingRight = '20px'; // Added padding for space when the sidebar is hidden
+            boxContainer.style.marginTop = '20px'; // Adjusted margin when the sidebar is hidden
+        } else {
+            sidebar.style.left = '0';
+            hamburger.style.marginLeft = '250px'; // Adjusted margin when the sidebar is shown
+            content.style.marginLeft = '250px'; // Adjusted margin when the sidebar is shown
+            content.style.marginRight = '0'; // Removed right margin when the sidebar is shown
+            content.style.paddingRight = '0'; // Removed padding for space when the sidebar is shown
+            boxContainer.style.marginTop = '20px'; // Adjusted margin when the sidebar is shown
+            if (window.innerWidth <= 600) {
+                // If the window width is less than or equal to 600px, set the box-container to column layout
+                boxContainer.style.flexDirection = 'column';
+            } else {
+                // Otherwise, set the box-container to row layout
+                boxContainer.style.flexDirection = 'row';
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

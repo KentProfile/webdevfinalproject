@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Your Website</title>
+</head>
+<body>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    
+    header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .profile-logo img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    .navbar {
+        background-color: #333;
+        color: #fff;
+        overflow: hidden;
+    }
+    
+    .navbar a {
+        float: left;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    
+    .navbar a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+    
+    .sidebar {
+        background-color: #eee;
+        float: left;
+        width: 200px;
+        height: 100vh;
+    }
+    
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .sidebar li {
+        padding: 10px;
+    }
+    
+    .sidebar a {
+        text-decoration: none;
+        color: #333;
+        display: block;
+    }
+    
+    .sidebar a:hover {
+        background-color: #ddd;
+    }
+    
+    main {
+        margin-left: 220px;
+        padding: 20px;
+    }
+    
+    h1 {
+        color: white;
+    }
+    
+    /* Profile Dropdown */
+    .profile-dropdown {
+        float: right;
+    }
+    
+    .profile-dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+    
+    .profile-dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        display: block;
+        text-decoration: none;
+    }
+    
+    .profile-dropdown-content a:hover {
+        background-color: #ddd;
+    }
+    
+    .profile-dropdown:hover .profile-dropdown-content {
+        display: block;
+    }
+    
+    .sidebar {
+        background-color: #eee;
+        float: left;
+        width: 200px;
+        height: 100vh;
+    }
+
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .sidebar li {
+        padding: 10px;
+        border-bottom: 1px solid #ddd; /* Add a border between sidebar items */
+    }
+
+    .sidebar a {
+        text-decoration: none;
+        color: #333;
+        display: block;
+        padding: 8px 16px; /* Adjust padding for a better container look */
+    }
+
+    .sidebar a:hover {
+        background-color: #ddd;
+    }
+
+</style>
+
+
+<header>
+    <div class="profile-logo">
+        <!-- Your profile logo or image goes here -->
+        <img src="profile-logo.png" alt="Profile Logo">
+    </div>
+</header>
+
+<aside class="sidebar">
+    <ul>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Employees</a></li>
+        <li><a href="#">Employee Maintenance</a></li>
+        <li><a href="#">Log-in Report</a></li>
+        <li><a href="#">Daily Attendance Report</a></li>
+        <li><a href="#">Monthly Attendance Report</a></li>
+    </ul>
+</aside>
+
+<main>
+    <!-- Your main content goes here -->
+    <h1>Employee Attendance System</h1>
+    <p>This is a simple example of a PHP webpage with a header and sidebar.</p>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<?php
+$servername = "your_database_server";
+$username = "your_database_username";
+$password = "your_database_password";
+$dbname = "attendance_db";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Fetch data from the database
+$sql = "SELECT employees.name, attendance.am_in, attendance.am_out, attendance.pm_in, attendance.pm_out
+        FROM attendance
+        JOIN employees ON attendance.employee_id = employees.id";
+$result = $conn->query($sql);
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Attendance Report</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Daily Attendance Report</h2>
+
+    <div>
+        <span style="font-weight: bold;">DATE:</span>
+        <?php
+        echo date("m-d-Y");
+        ?>
+    </div>
+
+    <table>
+        <tr>
+            <th>Employee Name</th>
+            <th>AM IN</th>
+            <th>AM OUT</th>
+            <th>PM IN</th>
+            <th>PM OUT</th>
+        </tr>
+
+        <?php
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>
+                        <td>{$row['name']}</td>
+                        <td>{$row['am_in']}</td>
+                        <td>{$row['am_out']}</td>
+                        <td>{$row['pm_in']}</td>
+                        <td>{$row['pm_out']}</td>
+                      </tr>";
+            }
+        } else {
+            echo "<tr><td colspan='5'>No data available</td></tr>";
+        }
+        ?>
+    </table>
+
+    <?php
+    // Close the database connection
+    $conn->close();
+    ?>
+
+</body>
+</html>

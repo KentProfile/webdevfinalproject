@@ -1,0 +1,107 @@
+<?php
+// Database connection
+$host = "localhost";
+$username = "root";
+$password = "";
+$database = "employee_management";
+
+$conn = mysqli_connect($host, $username, $password, $database);
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "SELECT id, first_name, middle_name, last_name, address, email, phone, time_in, time_out FROM employees";
+$result = mysqli_query($conn, $sql);
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            background-color: #40E0D0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            text-align: center;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            background-color: #ddd;
+            border-collapse: collapse;
+            
+        }
+        th, td {
+            padding: 10px;
+            border: .5px solid #ddd;
+        }
+        th {
+            background-color: #FF6B6B;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            text-decoration: none;
+            background-color: #FF6B6B;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Employee Listing</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Department</th>
+                <th>Position</th>
+                <th>Actions</th>
+            </tr>
+            <?php
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr>";
+                    echo "<td>" . $row['id'] . "</td>";
+                    echo "<td>" . $row['first_name'] . "</td>";
+                    echo "<td>" . $row['middle_name'] . "</td>";
+                    echo "<td>" . $row['last_name'] . "</td>";
+                    echo "<td>" . $row['address'] . "</td>";
+                    echo "<td>" . $row['email'] . "</td>";
+                    echo "<td>" . $row['phone'] . "</td>";
+                    echo "<td>" . $row['department'] . "</td>";  // Display Department
+                    echo "<td>" . $row['position'] . "</td>";    // Display Position
+                    echo "<td>
+                            <a href='edit-employee.php?id=" . $row['id'] . "'>Edit</a>
+                            <a href='delete-employee.php?id=" . $row['id'] . "'>Delete</a>
+                          </td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='10'>No employees found</td></tr>";
+            }
+            ?>
+        </table>
+        <br>
+        <a href="add-employee.php">Add Employee</a>
+        <a href="landing-page.php">Back to Landing Page</a>
+    </div>
+</body>
+</html>

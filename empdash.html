@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Dashboard</title>
+    <!-- Add your CSS stylesheets here -->
+    <style>
+        /* Style your sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #f1f1f1;
+            height: 100%;
+            position: fixed;
+        }
+        .sidebar a {
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+            color: #000;
+        }
+        .content {
+            margin-left: 250px; /* Same width as the sidebar */
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>Menu</h2>
+    <a href="#profile">Profile</a>
+    <a href="#attendance">Attendance</a>
+    <a href="#daily-time-record">Daily Time Record</a>
+    <!-- Add more links or customize as needed -->
+</div>
+
+<div class="content">
+    <?php
+    // Your PHP logic for different sections
+    if (isset($_GET['section'])) {
+        $section = $_GET['section'];
+        switch ($section) {
+            case 'profile':
+                include('profile.php'); // Include profile content
+                break;
+            case 'attendance':
+                include('attendance.php'); // Include attendance content
+                break;
+            case 'daily-time-record':
+                include('daily_time_record.php'); // Include daily time record content
+                break;
+            // Add more cases for additional sections if needed
+            default:
+                echo "Invalid section";
+        }
+    } else {
+        // Default content when no section is specified
+        echo "<h2>Welcome to the Employee Dashboard</h2>";
+    }
+    ?>
+</div>
+
+</body>
+</html>
